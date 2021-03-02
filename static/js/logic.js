@@ -1,7 +1,7 @@
 // Store the API endpoint inside queryUrl (data for all earthquakes in the past month)
 var Earthquake_Data = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson"
 
-// Tectonicplates_Data = 
+// Tectonicplates_Data = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
 
 // Perform a GET request to the query URL
 d3.json(Earthquake_Data, function(data) {
