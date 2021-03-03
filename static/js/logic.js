@@ -17,18 +17,18 @@ function markerSize(magnitude) {
 // Set marker color based on the depth of earthquake
 function markerColor(depth) {
   switch (true) {
-  case depth < 11:
-    return "#72F318";
-  case depth < 31:
-    return "#B4F318";
-  case depth < 51:
-    return "#F6EF03";
-  case depth < 71:
-    return "#F69E03";""
-  case depth < 91:
-    return "#F68803";
-  default:
-    return "#F33918";
+    case depth > 90:
+        return "#fc1a1a";
+    case depth > 70:
+        return "#ff7b00";
+    case depth > 50:
+        return "#ffe500";
+    case depth > 25:
+        return "#90c60a";
+    case depth > 10:
+        return "#7df318";
+    default:
+        return "#7df318"
   };
 }
 
@@ -90,7 +90,7 @@ function createFeatures(earthquakeData) {
 // Create map - display streetmap and earthquakes layers on load
   var myMap = L.map("map", {
     center: [
-      0.000000, 15.000000
+      0.000000, 25.000000
     ],
     zoom: 2.5,
     layers: [streetmap, earthquakes]
