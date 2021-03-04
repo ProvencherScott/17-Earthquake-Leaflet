@@ -29,7 +29,7 @@ var outdoors = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/
 // created to an array of layers.
 var map = L.map("map", {
   center: [
-    40.7, -94.5],
+    30, -94.5],
   zoom: 3,
   layers: [graymap, satellitemap, outdoors]
 });
@@ -49,7 +49,7 @@ let earthquakeUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2
 // of these maps will be visible at a time!
 var baseMaps = {
   Satellite: satellitemap,
-  Grayscale: graymap,
+  Graymap: graymap,
   Outdoors: outdoors
 };
 
@@ -68,7 +68,7 @@ L
   .addTo(map);
 
 // Our AJAX call retrieves our earthquake geoJSON data.
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson", function(data) {
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson", function(data) {
 
   // This function returns the style data for each of the earthquakes we plot on
   // the map. We pass the magnitude of the earthquake into two separate functions
