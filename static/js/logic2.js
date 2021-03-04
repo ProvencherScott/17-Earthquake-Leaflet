@@ -43,26 +43,21 @@ let earthquakeUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2
 //  var tectonicplates = new L.LayerGroup();
   var earthquakes = new L.LayerGroup();
 
-// Defining an object that contains all of our different map choices. Only one
-// of these maps will be visible at a time!
+// Define a baseMap object to hold layers
 var baseMaps = {
   Satellite: satellitemap,
   Graymap: graymap,
   Outdoors: outdoors
 };
 
-// We define an object that contains all of our overlays. Any combination of
-// these overlays may be visible at the same time!
+// Create overlay object to hold overlay layer
 var overlayMaps = {
   // "Tectonic Plates": tectonicplates,
   Earthquakes: earthquakes
 };
 
-// Then we add a control to the map that will allow the user to change which
-// layers are visible.
-L
-  .control
-  .layers(baseMaps, overlayMaps)
+// Add a control to select a layer
+L.control.layers(baseMaps, overlayMaps, {collapsed: false})
   .addTo(map);
 
 // Our AJAX call retrieves our earthquake geoJSON data.
@@ -87,17 +82,17 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geoj
   function markerColor(depth) {
     switch (true) {
     case depth > 90:
-      return "#ea2c2c";
+      return "#fc1a1a";
     case depth > 70:
-      return "#ea822c";
+      return "#ff7b00";
     case depth > 50:
-      return "#ee9c00";
+      return "#ffe500";
     case depth > 30:
-      return "#eecc00";
+      return "#90c60a";
     case depth > 10:
-      return "#d4ee00";
+      return "#7df318";
     default:
-      return "#98ee00";
+      return "#7df318";
     }
   }
 
@@ -145,14 +140,14 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geoj
   legend.onAdd = function() {
     var div = L.DomUtil.create("div", "info legend");
 
-    var grades = [-10, 10, 30, 50, 70, 90];
-    var colors = [
-      "#98ee00",
-      "#d4ee00",
-      "#eecc00",
-      "#ee9c00",
-      "#ea822c",
-      "#ea2c2c"];
+    // var grades = [-10, 10, 30, 50, 70, 90];
+    // var colors = [
+    //   "#98ee00",
+    //   "#d4ee00",
+    //   "#eecc00",
+    //   "#ee9c00",
+    //   "#ea822c",
+    //   "#ea2c2c"];
 
     // Loop through our intervals and generate a label with a colored square for each interval.
     for (var i = 0; i < grades.length; i++) {
