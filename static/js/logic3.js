@@ -1,4 +1,6 @@
+// Create the three tile layers to be displayed on the map
 var satellitemap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    // add attribution for copyright
   attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
   tileSize: 512,
   maxZoom: 18,
@@ -23,8 +25,7 @@ var outdoors = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/
   accessToken: API_KEY
 });
 
-// We then create the map object with options. Adding the tile layers we just
-// created to an array of layers.
+// We then create the map object with options. Adding the tile layers we just created to an array of layers.
 var map = L.map("map", {
   center: [
     0.0, 25.0],
@@ -73,7 +74,7 @@ d3.json(earthquakeUrl, function(data) {
     };
   }
 
-  // This function determines the color of the marker based on the magnitude of the earthquake.
+  // Create a function for color scale to show the depth of the earthquake. Earthquakes darker in color have a higher depth
   function markerColor(depth) {
     switch (true) {
     case depth > 90:
@@ -91,17 +92,16 @@ d3.json(earthquakeUrl, function(data) {
     }
   }
 
-  // This function determines the radius of the earthquake marker based on its magnitude.
-  // Earthquakes with a magnitude of 0 were being plotted with the wrong radius.
-  function getRadius(magnitude) {
+// Create a function for radius of the earthquake. Earthquakes with a wider circle have a higher magnitude
+function getRadius(magnitude) {
     if (magnitude === 0) {
-      return 1;
+        return 1;
     }
     return magnitude * 4;
-  }
+}
 
-  // Here we add a GeoJSON layer to the map once the file is loaded.
-  L.geoJson(data, {
+// Here we add a GeoJSON layer to the map once the file is loaded
+L.geoJson(data, {
     // We turn each feature into a circleMarker on the map.
     pointToLayer: function(feature, latlng) {
       return L.circleMarker(latlng);
@@ -131,21 +131,6 @@ d3.json(earthquakeUrl, function(data) {
     position: "bottomright"
   });
 
-  // legend.onAdd = function() {
-  //   var div = L.DomUtil.create("div", "info legend");
-
-  //   // Loop through our intervals and generate a label with a colored square for each interval.
-  //   for (var i = 0; i < grades.length; i++) {
-  //     div.innerHTML += "<i style='background: "
-  //       + colors[i]
-  //       + "'></i> "
-  //       + grades[i]
-  //       + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
-  //   }
-  //   return div;
-  // }
-
   legend.addTo(map);
 
-
- })
+})
